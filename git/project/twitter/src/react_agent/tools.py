@@ -86,9 +86,6 @@ async def post_tweet(text: str, media_inputs: Optional[List[str]] = None) -> dic
     Args:
         text: The tweet text content
         media_inputs: Optional list of media files to attach
-        
-    Returns:
-        dict: Result of the tweet posting operation
     """
     runtime = get_runtime(Context)
     tools = await _get_all_mcp_tools()
@@ -105,9 +102,6 @@ async def delete_tweet(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to delete
-        
-    Returns:
-        dict: Result of the tweet deletion operation
     """
     runtime = get_runtime(Context)
     tools = await _get_all_mcp_tools()
@@ -123,9 +117,6 @@ async def like_tweet(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to like
-        
-    Returns:
-        dict: Result of the like operation
     """
     runtime = get_runtime(Context)
     tools = await _get_all_mcp_tools()
@@ -141,9 +132,6 @@ async def retweet(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to retweet
-        
-    Returns:
-        dict: Result of the retweet operation
     """
     runtime = get_runtime(Context)
     tools = await _get_all_mcp_tools()
@@ -169,9 +157,6 @@ async def advanced_search_twitter(query: str) -> dict[str, Any]:
 
     Args:
         query: Natural language query or query with search operators
-
-    Returns:
-        dict: Search results with matching tweets
     """
     tools = await _get_all_mcp_tools()
     result = await tools["advanced_search_twitter"].ainvoke({"llm_text": query})
@@ -183,9 +168,6 @@ async def get_trends(woeid: int = 1) -> dict[str, Any]:
     
     Args:
         woeid: Geographic location ID (1=Global, 23424977=USA)
-
-    Returns:
-        dict: Current trending topics and hashtags list
     """
     tools = await _get_all_mcp_tools()
     result = await tools["get_trends"].ainvoke({"woeid": woeid})
@@ -197,9 +179,6 @@ async def get_tweets_by_IDs(tweet_ids: List[str]) -> dict[str, Any]:
     
     Args:
         tweet_ids: List of tweet IDs to retrieve
-        
-    Returns:
-        dict: Detailed information for the specified tweets
     """
     tools = await _get_all_mcp_tools()
     result = await tools["get_tweets_by_IDs"].ainvoke({"tweetIds": tweet_ids})
@@ -211,9 +190,6 @@ async def get_tweet_replies(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to get replies for
-        
-    Returns:
-        dict: List of replies to the specified tweet
     """
     tools = await _get_all_mcp_tools()
     result = await tools["get_tweet_replies"].ainvoke({"tweetId": tweet_id})
@@ -225,9 +201,6 @@ async def get_tweet_quotations(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to get quotations for
-        
-    Returns:
-        dict: List of quote tweets for the specified tweet
     """
     tools = await _get_all_mcp_tools()
     result = await tools["get_tweet_quotations"].ainvoke({"tweetId": tweet_id})
@@ -239,9 +212,6 @@ async def get_tweet_thread_context(tweet_id: str) -> dict[str, Any]:
     
     Args:
         tweet_id: The ID of the tweet to get thread context for
-        
-    Returns:
-        dict: Complete thread context for the specified tweet
     """
     tools = await _get_all_mcp_tools()
     result = await tools["get_tweet_thread_context"].ainvoke({"tweetId": tweet_id})

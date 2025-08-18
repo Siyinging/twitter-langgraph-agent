@@ -27,11 +27,8 @@ async def call_model(
     This function prepares the prompt, initializes the model, and processes the response.
 
     Args:
-        state (State): The current state of the conversation.
-        config (RunnableConfig): Configuration for the model run.
-
-    Returns:
-        dict: A dictionary containing the model's response message.
+        state: The current state of the conversation.
+        runtime: Runtime configuration for the model run.
     """
     # Initialize the model with tool binding. Change the model or add more tools here.
     model = load_chat_model(runtime.context.model).bind_tools(TOOLS)
@@ -83,10 +80,7 @@ def route_model_output(state: State) -> Literal["__end__", "tools"]:
     This function checks if the model's last message contains tool calls.
 
     Args:
-        state (State): The current state of the conversation.
-
-    Returns:
-        str: The name of the next node to call ("__end__" or "tools").
+        state: The current state of the conversation.
     """
     last_message = state.messages[-1]
     if not isinstance(last_message, AIMessage):
