@@ -36,6 +36,13 @@ class Context:
         },
     )
 
+    twitter_user_id: str = field(
+        default="e634c89a-a63a-40fe-af3b-b9d96de0b97a",
+        metadata={
+            "description": "The Twitter user ID (UUID) for Twitter MCP operations."
+        },
+    )
+
     def __post_init__(self) -> None:
         """Fetch env vars for attributes that were not passed as args."""
         for f in fields(self):
