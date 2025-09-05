@@ -1,0 +1,27 @@
+{
+  "timestamp": "2025-09-03T20:30:39.088608+00:00",
+  "keyword_trends": {},
+  "top_keywords": [
+    [
+      "AR",
+      12
+    ],
+    [
+      "AI",
+      11
+    ]
+  ],
+  "emerging_topics": [
+    "AR",
+    "AI"
+  ],
+  "tech_categories": {
+    "AI/ML": 11,
+    "Blockchain": 0,
+    "Cloud Computing": 0,
+    "IoT": 0,
+    "Cybersecurity": 0,
+    "Robotics": 0,
+    "Other": 12
+  }
+}

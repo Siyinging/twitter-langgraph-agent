@@ -33,7 +33,7 @@ async def _get_all_mcp_tools():
         {
             "name": "remote_server",
             "config": {
-                "url": "http://gc.rrrr.run:8001/sse",
+                "url": "https://twitter-mcp.gc.rrrr.run/sse",
                 "transport": "sse"
             }
         }
@@ -50,9 +50,10 @@ async def _get_all_mcp_tools():
             print(f"Warning: {server['name']} MCP server unavailable: {e}")
             # Continue processing other servers
     
-    # Smart filtering: keep only 10 core tools
+    # Smart filtering: keep only 12 core tools
     required_tools = {
         'post_tweet', 'delete_tweet', 'like_tweet', 'retweet',  # Write operations (4)
+        'reply_tweet', 'quote_tweet',  # Thread operations (2)
         'advanced_search_twitter', 'get_trends', 'get_tweets_by_IDs',  # Read operations (6)
         'get_tweet_replies', 'get_tweet_quotations', 'get_tweet_thread_context'
     }
@@ -142,6 +143,44 @@ async def retweet(tweet_id: str) -> dict[str, Any]:
     return cast(dict[str, Any], result)
 
 
+async def reply_tweet(tweet_id: str, text: str, media_inputs: Optional[List[str]] = None) -> dict[str, Any]:
+    """Reply to a tweet on Twitter - essential for creating threads.
+    
+    Args:
+        tweet_id: The ID of the tweet to reply to
+        text: The reply text content
+        media_inputs: Optional list of media files to attach
+    """
+    runtime = get_runtime(Context)
+    tools = await _get_all_mcp_tools()
+    result = await tools["reply_tweet"].ainvoke({
+        "tweet_id": tweet_id,
+        "text": text,
+        "user_id": runtime.context.twitter_user_id,
+        "media_inputs": media_inputs or []
+    })
+    return cast(dict[str, Any], result)
+
+
+async def quote_tweet(tweet_id: str, text: str, media_inputs: Optional[List[str]] = None) -> dict[str, Any]:
+    """Quote tweet (retweet with comment) on Twitter.
+    
+    Args:
+        tweet_id: The ID of the tweet to quote
+        text: The comment text to add
+        media_inputs: Optional list of media files to attach
+    """
+    runtime = get_runtime(Context)
+    tools = await _get_all_mcp_tools()
+    result = await tools["quote_tweet"].ainvoke({
+        "tweet_id": tweet_id,
+        "text": text,
+        "user_id": runtime.context.twitter_user_id,
+        "media_inputs": media_inputs or []
+    })
+    return cast(dict[str, Any], result)
+
+
 # Twitter Read Operations
 async def advanced_search_twitter(query: str) -> dict[str, Any]:
     """Advanced Twitter search with powerful syntax support.
@@ -223,6 +262,8 @@ TOOLS: List[Callable[..., Any]] = [
     search,
     # Twitter write operations (4)
     post_tweet, delete_tweet, like_tweet, retweet,
+    # Twitter thread operations (2)
+    reply_tweet, quote_tweet,
     # Twitter read operations (6)
     advanced_search_twitter, get_trends, get_tweets_by_IDs,
     get_tweet_replies, get_tweet_quotations, get_tweet_thread_context

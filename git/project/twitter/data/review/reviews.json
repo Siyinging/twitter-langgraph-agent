@@ -1,0 +1,18 @@
+{
+  "review_test_tcm_20250902_162220_162220": {
+    "review_id": "review_test_tcm_20250902_162220_162220",
+    "draft_id": "test_tcm_20250902_162220",
+    "reviewer_notes": "自动测试审核通过",
+    "decision": "approved",
+    "reviewed_at": "2025-09-02T08:22:20.149466+00:00",
+    "modifications": null
+  },
+  "review_headlines_20250902_162225_162225": {
+    "review_id": "review_headlines_20250902_162225_162225",
+    "draft_id": "headlines_20250902_162225",
+    "reviewer_notes": "测试批准",
+    "decision": "approved",
+    "reviewed_at": "2025-09-02T08:22:25.161259+00:00",
+    "modifications": null
+  }
+}

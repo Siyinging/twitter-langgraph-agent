@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-09-05T02:09:02.533455+00:00",
+  "process_running": true,
+  "log_recent": false,
+  "errors_found": [
+    "2025-09-04 04:36:18,309 - manual_scheduler - ERROR - 图片推文发布失败: unhandled errors in a TaskGroup (1 sub-exception)",
+    "2025-09-05 08:00:05,175 - react_agent.daily_publisher - ERROR - ❌ 发布今日科技头条出错: Called get_config outside of a runnable context"
+  ],
+  "last_publish": null,
+  "overall_status": "warning"
+}

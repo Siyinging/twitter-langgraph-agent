@@ -18,6 +18,16 @@ dependencies = [
     "langchain-tavily>=0.1",
     "langchain-mcp-adapters>=0.1.9",
     "apscheduler>=3.11.0",
+    "matplotlib>=3.7.0",
+    "plotly>=5.15.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "seaborn>=0.12.0",
+    "kaleido>=0.2.1",
+    "pillow>=10.0.0",
+    "selenium>=4.15.0",
+    "webdriver-manager>=4.0.0",
+    "tweepy>=4.16.0",
 ]
 
 
