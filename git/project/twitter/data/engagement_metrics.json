@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-03T20:30:39.088608+00:00",
+  "timestamp": "2025-09-12T08:30:35.955970+00:00",
   "keyword_trends": {},
   "top_keywords": [
     [
@@ -8,7 +8,7 @@
     ],
     [
       "AI",
-      11
+      9
     ]
   ],
   "emerging_topics": [
@@ -16,7 +16,7 @@
     "AI"
   ],
   "tech_categories": {
-    "AI/ML": 11,
+    "AI/ML": 9,
     "Blockchain": 0,
     "Cloud Computing": 0,
     "IoT": 0,

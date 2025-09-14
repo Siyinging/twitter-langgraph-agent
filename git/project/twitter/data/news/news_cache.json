@@ -1,0 +1,68 @@
+{
+  "tech": [],
+  "medical": [
+    {
+      "title": "Microsoft News 2 AI breakthroughs unlock new potential for health and science",
+      "url": "https://news.microsoft.com/source/features/ai/2-ai-breakthroughs-unlock-new-potential-for-health-and-science/",
+      "content": "*   [Windows](https://www.microsoft.com/en-us/windows/) *   [Small Business](https://www.microsoft.com/en-us/store/b/business) *   [AI](https://www.microsoft.com/en-us/ai) *   [Computers](https://www.microsoft.com/en-us/store/b/pc?icid=CNavDevicesPC) *   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365) *   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform) *   [Windows 365](https://www.microsoft.com/en-us/windows-365) *   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore) *   [Education](https://www.microsoft.com/en-us/education) *   [](https://www.facebook.com/sharer/sharer.php?u=https://news.microsoft.com/source/features/ai/2-ai-breakthroughs-unlock-new-potential-for-health-and-science/ \"Share on Facebook\") *   [](https://www.x.com/share?url=https://news.microsoft.com/source/features/ai/2-ai-breakthroughs-unlock-new-potential-for-health-and-science/ \"Share on X\") *   [](https://www.linkedin.com/sharing/share-o",
+      "source": "news.microsoft.com",
+      "published_time": "2025-09-13T00:30:49.262256+00:00",
+      "category": "medical",
+      "quality_score": 0.8,
+      "trending_score": 0.4,
+      "keywords": [
+        "AI"
+      ],
+      "summary": "Microsoft News 2 AI breakthroughs unlock new potential for health and science - * [Windows](https://www.microsoft.com/en-us/windows/) * [Small Business](https://www.microsoft.com/en-us/store/b/business) * [AI](https://www.microsof..."
+    },
+    {
+      "title": "MedEdge MEA 18 Healthcare Breakthroughs Redefining Medicine in 2025: From CRISPR to AI-Powered Bioprinting - MedEdge MEA",
+      "url": "https://mededgemea.com/18-healthcare-breakthroughs-technologies-2025/",
+      "content": "Gene-editing tools like **CRISPR-Cas9** are now powering breakthrough therapies targeting sickle cell disease, genetic disorders, and even certain cancers. Augmented reality meets diagnostics: smart lenses now track **glucose levels, intraocular pressure, hydration**, and could soon support **drug delivery** and **early disease detection**, reshaping eye care and chronic condition management. Next-gen AI models like **RFdiffusion** are now designing bespoke enzymes for pharma, diagnostics, and even sustainability-linked biomanufacturing, unlocking new tools in **synthetic biology** and drug innovation. From smartwatches to biosensors, wearable devices now deliver **real-time health insights**, enabling **predictive healthcare**, personalized alerts, and remote management of diabetes, heart disease, and hypertension through integrated AI platforms. From Japan’s synthetic blood to MENA’s AI-driven drug discovery, these technologies signal a shift from reactive care to **health intelligen",
+      "source": "mededgemea.com",
+      "published_time": "2025-09-13T00:30:49.261876+00:00",
+      "category": "medical",
+      "quality_score": 0.7,
+      "trending_score": 0.2,
+      "keywords": [
+        "AI"
+      ],
+      "summary": "MedEdge MEA 18 Healthcare Breakthroughs Redefining Medicine in 2025: From CRISPR to AI-Powered Bioprinting - MedEdge MEA - Gene-editing tools like **CRISPR-Cas9** are now powering breakthrough therapies targeting sickle cell disease, genetic disorders, and even certain can..."
+    }
+  ],
+  "tcm": [
+    {
+      "title": "Frontiers Frontiers | Artificial intelligence in traditional Chinese medicine: advances in multi-metabolite multi-target interaction modeling",
+      "url": "https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2025.1541509/full",
+      "content": "In contrast to single-compound Western medicines, TCM utilizes the synergistic effects of multiple active metabolites, achieving therapeutic outcomes through complex, multi-target interactions (Heinrich et al., 2022; Liu J. Recent advancements in artificial intelligence (AI) have transformed the study of multi-metabolite interactions in TCM, with machine learning (ML) and deep learning (DL) technologies reaching sufficient maturity for analyzing complex interactions between active metabolites and their multiple targets (Wang et al., 2021; Ma et al., 2023; Zhang et al., 2023a). Citation: Li Y, Liu X, Zhou J, Li F, Wang Y and Liu Q (2025) Artificial intelligence in traditional Chinese medicine: advances in multi-metabolite multi-target interaction modeling.",
+      "source": "frontiersin.org",
+      "published_time": "2025-09-13T00:31:08.620409+00:00",
+      "category": "tcm",
+      "quality_score": 0.653,
+      "trending_score": 0,
+      "keywords": [
+        "AI",
+        "artificial intelligence",
+        "machine learning"
+      ],
+      "summary": "Frontiers Frontiers | Artificial intelligence in traditional Chinese medicine: advances in multi-metabolite multi-target interaction modeling - In contrast to single-compound Western medicines, TCM utilizes the synergistic effects of multiple active metabolites, achieving therapeutic outcomes ..."
+    },
+    {
+      "title": "PubMed Central Integrating artificial intelligence into the modernization of traditional Chinese medicine industry: a review - PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10921893/",
+      "content": "Many studies show that artificial intelligence plays an important role in the quality evaluation of TCM, drug target discovery, optimization of compatibility and medical diagnosis of TCM, and AI pharmacy is becoming a very interesting research topic in academic circles (Xu et al., 2021; Gong et al., 2021; Li et al., 2022; Lin et al., 2022). Using AI technologies such as machine learning, deep learning and natural language processing, TCM literature, clinical cases and TCM databases can be mined, which can significantly improve the processing efficiency of pharmaceutical data and information, find potential TCM components and mechanisms, and greatly improve the efficiency and accuracy of TCM discovery (Zhou and Wang, 2014; Xu et al., 2019).",
+      "source": "pmc.ncbi.nlm.nih.gov",
+      "published_time": "2025-09-13T00:31:08.620828+00:00",
+      "category": "tcm",
+      "quality_score": 0.6497999999999999,
+      "trending_score": 0,
+      "keywords": [
+        "AI",
+        "artificial intelligence",
+        "machine learning"
+      ],
+      "summary": "PubMed Central Integrating artificial intelligence into the modernization of traditional Chinese medicine industry: a review - PMC - Many studies show that artificial intelligence plays an important role in the quality evaluation of TCM, drug target discovery, optimization of compat..."
+    }
+  ],
+  "last_updated": "2025-09-13T00:31:22.353004+00:00"
+}

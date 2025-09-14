@@ -17,6 +17,7 @@ from pathlib import Path
 
 from langchain_tavily import TavilySearch
 from react_agent.tools import _get_all_mcp_tools, search
+from react_agent.real_time_news import RealTimeNewsCollector
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,9 @@ class TechContentGenerator:
     def __init__(self):
         self.data_dir = Path("data")
         self.data_dir.mkdir(exist_ok=True)
+        
+        # 实时新闻收集器
+        self.news_collector = RealTimeNewsCollector()
         
         # 可持续AI话题库
         self.sustainable_ai_topics = [
@@ -208,9 +212,26 @@ class TechContentGenerator:
         try:
             logger.info("🔍 开始生成今日科技头条...")
             
-            # 1. 获取最新科技新闻（暂时跳过搜索）
-            # TODO: 修复搜索上下文问题后恢复  
-            web_results = None  # 暂时使用fallback内容
+            # 1. 获取实时新闻
+            try:
+                # 优先使用缓存，如果缓存过期则重新获取
+                news_data = await self.news_collector.get_cached_news(max_age_hours=2)
+                if not news_data:
+                    logger.info("获取实时新闻...")
+                    news_data = await self.news_collector.collect_latest_news(hours_back=12, max_results_per_category=5)
+                
+                # 基于实时新闻生成头条
+                if news_data:
+                    timely_headlines = await self.news_collector.generate_timely_content(news_data, "headlines")
+                    if timely_headlines:
+                        logger.info("✅ 使用实时新闻生成头条")
+                        return timely_headlines
+                        
+            except Exception as e:
+                logger.warning(f"实时新闻获取失败，使用备用方法: {e}")
+            
+            # 2. 备用：使用原有搜索方法
+            web_results = None
             
             # 2. 获取Twitter趋势
             twitter_trends = ""
@@ -264,14 +285,18 @@ class TechContentGenerator:
     def _get_fallback_headlines(self) -> str:
         """备用头条内容"""
         date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        fallback_headlines = [
-            f"📰 今日科技头条 {date}\n\n🤖 AI技术持续突破，大模型效率不断提升\n💡 量子计算研究取得新进展\n🚀 科技创新推动社会进步，未来值得期待！ #科技头条 #AI #创新",
-            f"📰 今日科技头条 {date}\n\n🔋 绿色科技成为发展新趋势\n🌐 边缘计算与云计算深度融合\n⚡ 技术变革正在改变我们的生活方式！ #科技头条 #绿色科技 #未来",
-            f"📰 今日科技头条 {date}\n\n🧠 神经网络架构持续创新\n🔐 网络安全技术日益重要\n🌟 科技让世界变得更加智能和安全！ #科技头条 #神经网络 #网络安全"
+        
+        # 更个人化的备用内容
+        personal_thoughts = [
+            f"🤔 {date}思考科技发展趋势，几个方向很值得关注：\n\n🤖 AI大模型在效率和应用上都有明显提升，特别是在实际场景中的表现让人印象深刻。\n💡 量子计算虽然还在早期，但每个突破都让我觉得未来会很不一样。\n\n持续观察这些技术如何改变我们的工作和生活 🚀 #科技观察 #AI思考",
+            
+            f"☕ {date}早上想到几个有趣的科技趋势：\n\n🌱 绿色科技不只是环保，更是效率革命。看到很多公司在重新思考技术与sustainability的关系。\n⚡ 边缘计算让处理更贴近用户，这种分布式思维很有启发性。\n\n科技真正的价值在于让生活更美好 ✨ #可持续科技 #创新思考",
+            
+            f"🧠 {date}对技术发展的一些想法：\n\n💻 神经网络架构的创新速度让人惊叹，每次看到新的breakthrough都会重新审视AI的潜能。\n🔐 网络安全变得越来越重要，特别是在万物互联的时代。\n\n技术进步的同时，安全和伦理考量也要跟上 🛡️ #AI安全 #技术伦理"
         ]
         
         import random
-        return random.choice(fallback_headlines)
+        return random.choice(personal_thoughts)
     
     async def generate_sustainable_ai_thread(self) -> List[str]:
         """生成可持续AI线程内容"""

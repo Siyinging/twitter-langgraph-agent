@@ -1,0 +1,23 @@
+[Unit]
+Description=Twitter智能自动发布系统
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=siying
+Group=siying
+WorkingDirectory=/Users/siying/git/project/twitter
+Environment=PATH=/Users/siying/.local/bin:/opt/homebrew/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 start_auto_publisher.py
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# 日志配置
+SyslogIdentifier=twitter-auto-publisher
+
+[Install]
+WantedBy=multi-user.target

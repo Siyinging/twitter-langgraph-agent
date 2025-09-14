@@ -19,6 +19,8 @@ from react_agent.content_generator import TechContentGenerator
 from react_agent.thread_creator import TwitterThreadCreator, ThreadResult
 from react_agent.content_reviewer import ContentReviewSystem
 from react_agent.tools import post_tweet, quote_tweet
+from react_agent.direct_publisher import direct_post_tweet, direct_post_thread, direct_post_with_media
+from react_agent.smart_media_manager import check_and_generate_image
 
 logger = logging.getLogger(__name__)
 
@@ -55,22 +57,23 @@ class DailyTechPublisher:
                 try:
                     if isinstance(draft.content, list):
                         # 发布线程
-                        thread_result = await self.thread_creator.create_thread(draft.content)
-                        if thread_result.success:
-                            await self.review_system.mark_as_published(draft.draft_id, thread_result.tweet_ids)
+                        thread_result = await direct_post_thread(draft.content)
+                        if thread_result.get("success"):
+                            tweet_ids = thread_result.get("tweet_ids", [])
+                            await self.review_system.mark_as_published(draft.draft_id, tweet_ids)
                             published_count += 1
                             results.append({
                                 "draft_id": draft.draft_id,
                                 "type": "thread",
-                                "tweet_ids": thread_result.tweet_ids,
+                                "tweet_ids": tweet_ids,
                                 "success": True
                             })
                             logger.info(f"✅ 线程发布成功: {draft.draft_id}")
                     else:
                         # 发布单条推文
-                        result = await post_tweet(draft.content)
+                        result = await direct_post_tweet(draft.content)
                         if result and result.get('success'):
-                            tweet_id = result.get('data', {}).get('id')
+                            tweet_id = result.get('tweet_id') or (result.get('data', {}).get('tweet_id') if isinstance(result.get('data'), dict) else None)
                             await self.review_system.mark_as_published(draft.draft_id, [tweet_id])
                             published_count += 1
                             results.append({
@@ -177,8 +180,15 @@ class DailyTechPublisher:
                 logger.info("🏥 生成中医科技头条")
                 headlines = await self.content_generator.generate_tcm_tech_headlines()
             
-            # 发布推文
-            result = await post_tweet(headlines)
+            # 检查是否需要配图
+            image_path = await check_and_generate_image(headlines, "morning_headlines")
+            
+            # 发布推文（使用直接发布器避免context问题）
+            if image_path:
+                logger.info(f"📸 为头条配图: {image_path}")
+                result = await direct_post_with_media(headlines, [image_path])
+            else:
+                result = await direct_post_tweet(headlines)
             
             publish_result = {
                 "task": "morning_headlines",
@@ -190,14 +200,14 @@ class DailyTechPublisher:
             }
             
             if result and result.get('success'):
-                tweet_id = result.get('data', {}).get('id')
+                tweet_id = result.get('tweet_id') or (result.get('data', {}).get('tweet_id') if isinstance(result.get('data'), dict) else None)
                 publish_result.update({
                     "success": True,
                     "tweet_id": tweet_id,
                 })
                 logger.info(f"✅ 今日科技头条发布成功: {tweet_id}")
             else:
-                error_msg = result.get('message', '发布失败') if result else '发布失败'
+                error_msg = result.get('error', '发布失败') if result else '发布失败'
                 publish_result["error"] = error_msg
                 logger.error(f"❌ 今日科技头条发布失败: {error_msg}")
             
@@ -223,22 +233,24 @@ class DailyTechPublisher:
             # 生成智慧线程内容（轮换AI和中医科技）
             thread_content = await self.content_generator.generate_wisdom_ai_thread()
             
-            # 创建线程
-            thread_result = await self.thread_creator.create_thread(thread_content)
+            # 创建线程（使用直接发布器）
+            thread_result = await direct_post_thread(thread_content)
             
             publish_result = {
                 "task": "ai_thread",
                 "time": current_time.isoformat(),
-                "success": thread_result.success,
-                "tweet_ids": thread_result.tweet_ids,
-                "thread_url": thread_result.thread_url,
-                "error": thread_result.error_message
+                "success": thread_result.get("success", False),
+                "tweet_ids": thread_result.get("tweet_ids", []),
+                "thread_url": thread_result.get("thread_url"),
+                "error": thread_result.get("error")
             }
             
-            if thread_result.success:
-                logger.info(f"✅ 可持续AI线程发布成功: {len(thread_result.tweet_ids)}条推文")
+            if thread_result.get("success"):
+                tweet_count = len(thread_result.get("tweet_ids", []))
+                logger.info(f"✅ 可持续AI线程发布成功: {tweet_count}条推文")
             else:
-                logger.error(f"❌ 可持续AI线程发布失败: {thread_result.error_message}")
+                error = thread_result.get("error", "未知错误")
+                logger.error(f"❌ 可持续AI线程发布失败: {error}")
             
             # 记录发布日志
             await self._log_publish_result(publish_result)
@@ -262,8 +274,15 @@ class DailyTechPublisher:
             # 生成中医科技专题内容
             tcm_content = await self.content_generator.generate_daily_tcm_tech_content()
             
+            # 检查是否需要配图
+            image_path = await check_and_generate_image(tcm_content, "tcm_tech_focus")
+            
             # 发布推文
-            result = await post_tweet(tcm_content)
+            if image_path:
+                logger.info(f"📸 为中医科技专题配图: {image_path}")
+                result = await direct_post_with_media(tcm_content, [image_path])
+            else:
+                result = await direct_post_tweet(tcm_content)
             
             publish_result = {
                 "task": "tcm_tech_focus",
@@ -382,7 +401,7 @@ class DailyTechPublisher:
             recap_content = await self.content_generator.generate_weekly_recap()
             
             # 发布推文
-            result = await post_tweet(recap_content)
+            result = await direct_post_tweet(recap_content)
             
             publish_result = {
                 "task": "weekly_recap",

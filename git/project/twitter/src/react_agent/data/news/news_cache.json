@@ -1,0 +1,53 @@
+{
+  "tech": [
+    {
+      "title": "Artificial Intelligence - AI News",
+      "url": "https://www.reuters.com/technology/artificial-intelligence/",
+      "content": "Explore the latest artificial intelligence news with Reuters - from AI breakthroughs and technology trends to regulation, ethics, business and global impact",
+      "source": "reuters.com",
+      "published_time": "2025-09-12T09:38:22.388606+00:00",
+      "category": "tech",
+      "quality_score": 0.8,
+      "trending_score": 0.4,
+      "keywords": [
+        "AI",
+        "artificial intelligence"
+      ],
+      "summary": "Artificial Intelligence - AI News - Explore the latest artificial intelligence news with Reuters - from AI breakthroughs and technology trends to regulation, ethics, business and global ..."
+    }
+  ],
+  "medical": [
+    {
+      "title": "Reinventing the eye exam with artificial intelligence",
+      "url": "https://www.nature.com/articles/s41591-025-03968-1",
+      "content": "Ophthalmology could be the first medical specialty fundamentally transformed by artificial intelligence. Pearse Keane recalls an early breakthrough in this",
+      "source": "nature.com",
+      "published_time": "2025-09-12T09:38:28.180780+00:00",
+      "category": "medical",
+      "quality_score": 0.7,
+      "trending_score": 0.2,
+      "keywords": [
+        "artificial intelligence"
+      ],
+      "summary": "Reinventing the eye exam with artificial intelligence - Ophthalmology could be the first medical specialty fundamentally transformed by artificial intelligence. Pearse Keane recalls an early breakthrough in..."
+    },
+    {
+      "title": "Healthcare IT News: Home",
+      "url": "http://www.healthcareitnews.com/",
+      "content": "New rapid skin cancer diagnosis AI developed in Melbourne Full coverage: HIMSS25 APAC Health Conference & Exhibition Loving the AI Revolution: How Automation is Humanizing Healthcare and Improving Provider Well-Being ### Connect with Healthcare IT News #### The latest news in health IT – straight to your inbox New rapid skin cancer diagnosis AI developed in Melbourne Readying hospital defenses for the AI-powered phishing surge How WellSpan Health is making innovative use of AI-enabled virtual nursing One recent artificial intelligence project at the Pennsylvania health system is the launch of the virtual patient monitoring and nursing platform to boost patient safety while alleviating nurses' workloads. Transforming specialties with eClinicalWorks AI-powered innovations Empowering independent practices with eClinicalWorks AI-powered innovations",
+      "source": "healthcareitnews.com",
+      "published_time": "2025-09-12T09:38:35.579526+00:00",
+      "category": "medical",
+      "quality_score": 0.6712,
+      "trending_score": 0.2,
+      "keywords": [
+        "AI",
+        "artificial intelligence",
+        "automation"
+      ],
+      "summary": "Healthcare IT News: Home - New rapid skin cancer diagnosis AI developed in Melbourne Full coverage: HIMSS25 APAC Health Conference & Exhibition Loving the AI Revolution: How Aut..."
+    }
+  ],
+  "tcm": [],
+  "last_updated": "2025-09-12T09:38:46.440069+00:00"
+}
