@@ -213,12 +213,34 @@ class ImageGenerator:
             draw = ImageDraw.Draw(img)
             
             try:
-                # 尝试使用系统字体
-                title_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttc", 48)
-                subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttc", 24)
-                stats_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttc", 20)
-                logo_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttc", 28)
-            except:
+                # 尝试使用支持中文的系统字体
+                chinese_fonts = [
+                    "/System/Library/Fonts/STHeiti Medium.ttc",  # macOS 中文字体
+                    "/System/Library/Fonts/STHeiti Light.ttc",   # macOS 中文字体
+                    "/System/Library/Fonts/Supplemental/Songti.ttc",  # macOS 宋体
+                    "/System/Library/Fonts/Arial Unicode MS.ttf",  # 支持中文的Arial
+                    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",  # Linux
+                    "/Windows/Fonts/simhei.ttf",  # Windows 中文
+                    "/System/Library/Fonts/Helvetica.ttc",  # macOS 英文字体
+                    "/System/Library/Fonts/Arial.ttc"  # 最后备用
+                ]
+                
+                font_path = None
+                for font in chinese_fonts:
+                    if os.path.exists(font):
+                        font_path = font
+                        break
+                
+                if font_path:
+                    title_font = ImageFont.truetype(font_path, 48)
+                    subtitle_font = ImageFont.truetype(font_path, 24)
+                    stats_font = ImageFont.truetype(font_path, 20)
+                    logo_font = ImageFont.truetype(font_path, 28)
+                    logger.info(f"✅ 使用中文字体: {font_path}")
+                else:
+                    raise FileNotFoundError("No suitable font found")
+            except Exception as e:
+                logger.warning(f"无法加载系统字体: {e}, 使用默认字体")
                 # 备用默认字体
                 title_font = ImageFont.load_default()
                 subtitle_font = ImageFont.load_default()
@@ -289,10 +311,31 @@ class ImageGenerator:
             img = Image.open(image_path)
             draw = ImageDraw.Draw(img)
             
-            # 设置水印属性
+            # 设置水印属性 - 使用支持中文的字体
             try:
-                font = ImageFont.truetype("/System/Library/Fonts/Arial.ttc", 24)
-            except:
+                chinese_fonts = [
+                    "/System/Library/Fonts/STHeiti Medium.ttc",
+                    "/System/Library/Fonts/STHeiti Light.ttc",
+                    "/System/Library/Fonts/Supplemental/Songti.ttc",
+                    "/System/Library/Fonts/Arial Unicode MS.ttf",
+                    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                    "/Windows/Fonts/simhei.ttf",
+                    "/System/Library/Fonts/Helvetica.ttc",
+                    "/System/Library/Fonts/Arial.ttc"
+                ]
+                
+                font_path = None
+                for font_candidate in chinese_fonts:
+                    if os.path.exists(font_candidate):
+                        font_path = font_candidate
+                        break
+                
+                if font_path:
+                    font = ImageFont.truetype(font_path, 24)
+                else:
+                    font = ImageFont.load_default()
+            except Exception as e:
+                logger.warning(f"水印字体加载失败: {e}")
                 font = ImageFont.load_default()
             
             # 计算水印位置（右下角）

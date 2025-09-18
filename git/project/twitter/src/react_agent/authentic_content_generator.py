@@ -31,6 +31,10 @@ class AuthenticContentGenerator:
         # 实时新闻收集器
         self.news_collector = RealTimeNewsCollector()
         
+        # AI工具推荐生成器
+        from react_agent.ai_tools_content_generator import AIToolsContentGenerator
+        self.ai_tools_generator = AIToolsContentGenerator()
+        
         # 真实的个人化开场白 - 去掉假大空
         self.real_openings = [
             "刚刚看到个新闻，有点意思",
@@ -349,6 +353,41 @@ class AuthenticContentGenerator:
         if len(content) > max_length:
             content = content[:max_length-3] + "..."
         return content
+    
+    async def generate_ai_tools_content(self) -> str:
+        """生成AI工具推荐内容"""
+        try:
+            logger.info("🔧 生成AI工具推荐内容...")
+            
+            # 随机选择内容类型
+            content_types = ["recommendation", "comparison", "overview", "tips"]
+            content_type = random.choice(content_types)
+            
+            if content_type == "recommendation":
+                content = self.ai_tools_generator.generate_tool_recommendation()
+            elif content_type == "comparison":
+                content = self.ai_tools_generator.generate_tools_comparison()
+            elif content_type == "overview":
+                content = self.ai_tools_generator.generate_category_overview()
+            else:  # tips
+                content = self.ai_tools_generator.generate_usage_tip()
+            
+            logger.info("✅ AI工具推荐内容生成完成")
+            return content
+            
+        except Exception as e:
+            logger.error(f"❌ AI工具内容生成失败: {e}")
+            return self._get_fallback_ai_tools_content()
+    
+    def _get_fallback_ai_tools_content(self) -> str:
+        """备用AI工具内容"""
+        fallbacks = [
+            "最近试了几个免费AI工具，ChatGPT免费版日常够用，Notion AI整理笔记很方便。\n\n关键是找到适合自己工作流的，不用追最新的 🔧 #AI工具",
+            "推荐个实用组合：ChatGPT写文案 + Canva做设计 + 剪映加字幕。\n\n都有免费版本，小团队够用了。工具不在多，在于用得熟 💡 #效率工具",
+            "用AI工具一年多的感受：别指望一个工具解决所有问题。\n\n多备几个选择，关键时候有备案。免费版本通常就够用 🎯 #AI心得"
+        ]
+        
+        return random.choice(fallbacks)
 
 
 # 工厂函数

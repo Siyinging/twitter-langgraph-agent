@@ -26,10 +26,32 @@ from .data_collector import TechDataCollector
 logger = logging.getLogger(__name__)
 
 # 设置中文字体和图表样式
-plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
+plt.rcParams['font.sans-serif'] = ['STHeiti Medium', 'STHeiti Light', 'Songti TC', 'Arial Unicode MS', 'DejaVu Sans', 'Helvetica']
 plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['font.family'] = 'sans-serif'
 sns.set_style("whitegrid")
 sns.set_palette("husl")
+
+# 设置Plotly中文字体
+try:
+    # 尝试配置Kaleido，如果可用的话
+    if hasattr(pio, 'kaleido') and pio.kaleido.scope is not None:
+        pio.kaleido.scope.mathjax = None
+except:
+    # Kaleido不可用，跳过配置
+    pass
+
+pio.templates.default = "plotly"
+# 为Plotly图表设置全局字体配置
+plotly_font_config = {
+    'family': 'STHeiti Medium, STHeiti Light, Songti TC, Arial Unicode MS, Helvetica Neue, Helvetica, sans-serif',
+    'size': 12,
+    'color': 'black'
+}
+
+# 应用全局字体配置到Plotly模板
+import plotly.graph_objects as go
+pio.templates["plotly"].layout.font = plotly_font_config
 
 
 class TechVisualizer:

@@ -268,6 +268,10 @@ class SmartMediaManager:
             import matplotlib.patches as patches
             import numpy as np
             
+            # 设置中文字体
+            plt.rcParams['font.sans-serif'] = ['STHeiti Medium', 'STHeiti Light', 'Songti TC', 'Arial Unicode MS', 'DejaVu Sans', 'Helvetica']
+            plt.rcParams['axes.unicode_minus'] = False
+            
             fig, ax = plt.subplots(figsize=(10, 6))
             ax.set_xlim(0, 10)
             ax.set_ylim(0, 6)

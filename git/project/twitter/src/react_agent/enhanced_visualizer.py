@@ -74,7 +74,7 @@ class EnhancedVisualizer:
                 ),
                 text=[f"{v}" for v in values],
                 textposition='inside',
-                textfont=dict(color='white', size=16, family="Arial Black"),
+                textfont=dict(color='white', size=16, family="STHeiti Medium, Arial Unicode MS, sans-serif"),
                 hovertemplate='%{y}: %{x}<extra></extra>'
             ))
             
@@ -83,18 +83,18 @@ class EnhancedVisualizer:
                 title=dict(
                     text="<b>🔥 科技热词TOP5</b>",
                     x=0.5,
-                    font=dict(size=28, family="Arial Black", color=self.twitter_colors['dark']),
+                    font=dict(size=28, family="STHeiti Medium, Arial Unicode MS, sans-serif", color=self.twitter_colors['dark']),
                     pad=dict(t=20, b=10)
                 ),
                 xaxis=dict(
                     title="热度值",
-                    titlefont=dict(size=14),
+                    title_font=dict(size=14),
                     showgrid=True,
                     gridcolor='#E1E8ED',
                     zeroline=False
                 ),
                 yaxis=dict(
-                    titlefont=dict(size=14),
+                    title_font=dict(size=14),
                     tickfont=dict(size=14)
                 ),
                 height=500,
@@ -102,7 +102,7 @@ class EnhancedVisualizer:
                 margin=dict(l=120, r=80, t=80, b=60),
                 paper_bgcolor='white',
                 plot_bgcolor='white',
-                font=dict(family="Arial, sans-serif"),
+                font=dict(family="STHeiti Medium, Arial Unicode MS, sans-serif"),
                 showlegend=False
             )
             
@@ -166,7 +166,7 @@ class EnhancedVisualizer:
                     line=dict(color='white', width=3)
                 ),
                 textinfo='label+percent',
-                textfont=dict(size=14, color='white', family="Arial Bold"),
+                textfont=dict(size=14, color='white', family="STHeiti Medium, Arial Unicode MS, sans-serif"),
                 hovertemplate='<b>%{label}</b><br>数量: %{value}<br>占比: %{percent}<extra></extra>'
             ))
             
@@ -175,7 +175,7 @@ class EnhancedVisualizer:
             fig.add_annotation(
                 text=f"<b>{total}</b><br>总数",
                 x=0.5, y=0.5,
-                font=dict(size=24, color=self.twitter_colors['dark'], family="Arial Black"),
+                font=dict(size=24, color=self.twitter_colors['dark'], family="STHeiti Medium, Arial Unicode MS, sans-serif"),
                 showarrow=False
             )
             
@@ -183,7 +183,7 @@ class EnhancedVisualizer:
                 title=dict(
                     text="<b>📈 科技领域市场分布</b>",
                     x=0.5,
-                    font=dict(size=28, family="Arial Black", color=self.twitter_colors['dark']),
+                    font=dict(size=28, family="STHeiti Medium, Arial Unicode MS, sans-serif", color=self.twitter_colors['dark']),
                     pad=dict(t=20)
                 ),
                 height=600,
@@ -322,7 +322,7 @@ class EnhancedVisualizer:
                 title=dict(
                     text="<b>⚡ 科技数据实时监控</b>",
                     x=0.5,
-                    font=dict(size=26, family="Arial Black", color=self.twitter_colors['dark']),
+                    font=dict(size=26, family="STHeiti Medium, Arial Unicode MS, sans-serif", color=self.twitter_colors['dark']),
                     pad=dict(t=20)
                 ),
                 height=700,
@@ -330,7 +330,7 @@ class EnhancedVisualizer:
                 margin=dict(t=100, b=60, l=80, r=80),
                 paper_bgcolor='white',
                 plot_bgcolor='white',
-                font=dict(family="Arial, sans-serif")
+                font=dict(family="STHeiti Medium, Arial Unicode MS, sans-serif")
             )
             
             # 更新坐标轴标签

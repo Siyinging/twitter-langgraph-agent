@@ -51,7 +51,8 @@ class IntelligentAutoPublisher:
         # 发布时间表
         self.schedule = {
             8: {"type": "headlines", "name": "🌅 今日科技头条"},
-            14: {"type": "tcm", "name": "🏥 中医科技专题"}
+            14: {"type": "tcm", "name": "🏥 中医科技专题"},
+            20: {"type": "ai_tools", "name": "🔧 AI工具推荐"}
         }
         
         # 智能发布配置
@@ -127,6 +128,8 @@ class IntelligentAutoPublisher:
                 content = await generator.generate_authentic_headlines()
             elif config['type'] == 'tcm':
                 content = await generator.generate_authentic_tcm_content()
+            elif config['type'] == 'ai_tools':
+                content = await generator.generate_ai_tools_content()
             else:
                 content = await generator.generate_authentic_headlines()
             
@@ -138,6 +141,8 @@ class IntelligentAutoPublisher:
                     content = await generator.generate_authentic_headlines()
                 elif config['type'] == 'tcm':
                     content = await generator.generate_authentic_tcm_content()
+                elif config['type'] == 'ai_tools':
+                    content = await generator.generate_ai_tools_content()
             
             logger.info(f"📝 生成内容: {content[:50]}...")
             
